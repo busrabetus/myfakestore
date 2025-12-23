@@ -1,11 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CartDetail from '../screens/cart_detail';
-import Carts from '../screens/cart_page';
-import Login from '../screens/login_page';
-import ProductDetail from '../screens/product_detail';
-import Products from '../screens/product_page';
-import Users from '../screens/user_page';
+import CartDetail from '../screens/cartdetail';
+import Carts from '../screens/carts';
+import Login from '../screens/login';
+import ProductDetail from '../screens/productdetail';
+import Products from '../screens/products';
+import Users from '../screens/users';
 
 const Stack = createNativeStackNavigator();
 
