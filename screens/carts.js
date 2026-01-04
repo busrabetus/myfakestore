@@ -58,15 +58,6 @@ export default function Carts({ navigation }) {
         getdata();
     }, []);
 
-    if (loading) {
-        return (
-            <PageTemplate>
-                <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 50 }} />
-            </PageTemplate>
-        );
-    }
-
-
     return (
         <PageTemplate title={'Carts'}>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>

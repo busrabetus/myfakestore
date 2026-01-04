@@ -15,14 +15,6 @@ export default function Products({ navigation }) {
             .finally(() => setLoading(false));
     }, []);
 
-    if (loading) {
-        return (
-            <PageTemplate>
-                <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 50 }} />
-            </PageTemplate>
-        );
-    }
-
     return (
         <PageTemplate title="Products">
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
