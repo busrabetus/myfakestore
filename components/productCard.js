@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 
-export default function ProductCard({ title, price, image }) {
+export default function ProductCard({ title, price, image, onPress }) {
     return (
         <View style={styles.card}>
             <Image source={{ uri: image }} style={styles.image} />
@@ -13,7 +13,7 @@ export default function ProductCard({ title, price, image }) {
 
 const styles = StyleSheet.create({
     card: {
-        width: '48%',
+        width: '100%',
         height: 250,
         backgroundColor: 'white',
         padding: 10,
@@ -36,11 +36,23 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        textAlign: 'center',
+        fontSize: 14,
+        textAlign: 'left',
         marginBottom: 5,
     },
     price: {
         color: 'green',
         fontWeight: 'bold',
-    }
+        alignSelf: 'flex-end',
+        textAlign:'right',
+        fontSize: 18
+    },
+    button: {
+        width: '100%',
+        height: 35,
+        backgroundColor: '#007bff',
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });

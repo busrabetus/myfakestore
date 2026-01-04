@@ -1,8 +1,8 @@
-import { View, Text, Pressable, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, Pressable, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import PageTemplate from '../components/PageTemplate';
-import ProductCard from '../components/productCard'; 
-import { getProducts } from '../api/getproducts';
+import ProductCard from '../components/productCard';
+import { getProducts } from '../api/productapi';
 
 export default function Products({ navigation }) {
     const [products, setProducts] = useState([]);
@@ -24,46 +24,52 @@ export default function Products({ navigation }) {
     }
 
     return (
-        <PageTemplate title= "Products">
+        <PageTemplate title="Products">
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
-                <Pressable style={{ backgroundColor: 'white', borderWidth: 1, borderColor: 'gray', alignItems: 'center', justifyContent: 'center', width: '48%', height: 30, borderRadius: 12, shadowColor: '#000',shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4}}>
+                <Pressable  style={{ backgroundColor: 'white', borderWidth: 1, borderColor: 'gray', alignItems: 'center', justifyContent: 'center', width: '48%', height: 30, borderRadius: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4 }}>
                     <Text style={{ color: 'green', fontSize: 15, fontWeight: 'bold' }}>Add Product</Text>
                 </Pressable>
-                <Pressable style={{ backgroundColor: 'white', borderWidth: 1, borderColor: 'gray', alignItems: 'center', justifyContent: 'center', width: '48%', height: 30, borderRadius: 12, shadowColor: '#000',shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4}}>
+                <Pressable style={{ backgroundColor: 'white', borderWidth: 1, borderColor: 'gray', alignItems: 'center', justifyContent: 'center', width: '48%', height: 30, borderRadius: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4 }}>
                     <Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }}>Delete Product</Text>
                 </Pressable>
             </View>
 
-            <Pressable style={{ backgroundColor: 'white', borderWidth: 1, borderColor: 'gray', alignItems: 'center', justifyContent: 'center', width: '48%', height: 30, borderRadius: 12, marginTop: 10, shadowColor: '#000',shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4} }>
+            <Pressable style={{ backgroundColor: 'white', borderWidth: 1, borderColor: 'gray', alignItems: 'center', justifyContent: 'center', width: '48%', height: 30, borderRadius: 12, marginTop: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4 }}>
                 <Text style={{ color: 'blue', fontSize: 15, fontWeight: 'bold' }}>Update Product</Text>
             </Pressable>
 
             <Text style={{ color: '#202B41', marginTop: 10 }}>Filter by..</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 10 }}>
-                <Pressable style={{ backgroundColor: '#202B41', borderRadius: 12, width: 75, height: 30, alignItems: 'center', justifyContent: 'center', shadowColor: '#000',shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4 }}>
+                <Pressable style={{ backgroundColor: '#202B41', borderRadius: 12, width: 75, height: 30, alignItems: 'center', justifyContent: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4 }}>
                     <Text style={{ color: 'white', fontWeight: 'bold' }}>Kategori</Text>
                 </Pressable>
-                <Pressable style={{ backgroundColor: '#202B41', borderRadius: 12, width: 75, height: 30, alignItems: 'center', justifyContent: 'center' , shadowColor: '#000',shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4}}>
+                <Pressable style={{ backgroundColor: '#202B41', borderRadius: 12, width: 75, height: 30, alignItems: 'center', justifyContent: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4 }}>
                     <Text style={{ color: 'white', fontWeight: 'bold' }}>Kategori</Text>
                 </Pressable>
-                <Pressable style={{ backgroundColor: '#202B41', borderRadius: 12, width: 75, height: 30, alignItems: 'center', justifyContent: 'center' , shadowColor: '#000',shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4}}>
+                <Pressable style={{ backgroundColor: '#202B41', borderRadius: 12, width: 75, height: 30, alignItems: 'center', justifyContent: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4 }}>
                     <Text style={{ color: 'white', fontWeight: 'bold' }}>Kategori</Text>
                 </Pressable>
-                <Pressable style={{ backgroundColor: '#202B41', borderRadius: 12, width: 75, height: 30, alignItems: 'center', justifyContent: 'center' , shadowColor: '#000',shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4}}>
+                <Pressable style={{ backgroundColor: '#202B41', borderRadius: 12, width: 75, height: 30, alignItems: 'center', justifyContent: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4 }}>
                     <Text style={{ color: 'white', fontWeight: 'bold' }}>Kategori</Text>
                 </Pressable>
             </View>
 
             <ScrollView contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 10, justifyContent: 'space-between' }}>
                 {products.map(product => (
-                    <ProductCard
+                    <TouchableOpacity
                         key={product.id}
-                        title={product.title}
-                        price={product.price}
-                        image={product.image}
-                    />
+                        onPress={() => navigation.navigate('ProductDetail', { productId: product.id })}
+                        style={{ width: '48%' }} 
+                    >
+                        <ProductCard
+                            title={product.title}
+                            price={product.price}
+                            image={product.image}
+                        />
+                    </TouchableOpacity>
                 ))}
             </ScrollView>
+
         </PageTemplate>
     );
 }

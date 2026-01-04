@@ -2,13 +2,24 @@ import { View, TouchableOpacity, Text } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute} from '@react-navigation/native'
+
 
 export default function PageTemplate({ children, title }) {
     const navigation = useNavigation();
+    const route = useRoute();
+
+    const handleRightPress = () => {
+        if (route.name === 'Carts') {
+            navigation.navigate('Users'); 
+        } else {
+            navigation.navigate('Carts'); 
+        }
+    }
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#202B41' }}>
-            <View style={{ height: 56, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16 }}>
+            <View style={{ height: 56, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16 ,justifyContent: 'space-between'}}>
                 <TouchableOpacity onPress={() => navigation.openDrawer()}>
                     <Ionicons name="menu" size={26} color="white" />
                 </TouchableOpacity>
@@ -16,10 +27,15 @@ export default function PageTemplate({ children, title }) {
                     color: 'white',
                     fontSize: 25,
                     fontWeight: 'bold',
-                    marginLeft: 100
+                    flex: 1,
+                    textAlign: 'center'
                 }}>
                     {title}
                 </Text>
+
+                <TouchableOpacity onPress={handleRightPress}>
+                    <Ionicons name="cart" size={26} color="white" />
+                </TouchableOpacity>
 
             </View>
 
@@ -28,6 +44,7 @@ export default function PageTemplate({ children, title }) {
                     {children}
                 </View>
             </View>
+            
         </SafeAreaView>
     )
 }
